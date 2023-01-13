@@ -10,14 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-
-@ToString
-@Setter
-@Getter
 @Entity
 @Table(name = "messages",uniqueConstraints = {@UniqueConstraint(columnNames = {"message_id"})})
 public class Messages {

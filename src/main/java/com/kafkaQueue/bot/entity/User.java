@@ -8,15 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import java.util.Date;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "USER",uniqueConstraints = {@UniqueConstraint(columnNames = {"user_number"})})
-@ToString
-@Setter
-@Getter
 public class User {
 
     @Id
