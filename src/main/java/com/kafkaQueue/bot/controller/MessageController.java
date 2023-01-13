@@ -3,6 +3,9 @@ package com.kafkaQueue.bot.controller;
 import com.kafkaQueue.bot.kafkaService.KafkaProducer;
 import com.kafkaQueue.bot.pdfExport.PDFGenerator;
 import com.kafkaQueue.bot.service.UserService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,17 +31,18 @@ public class MessageController {
     UserService userService;
 
     @PostMapping("/{userNumber}/{messageId}/publish")
-    public ResponseEntity<String> publish( @PathVariable(value = "userNumber") long userId,@PathVariable(value = "messageId") long messageId, @RequestParam("message") String message) {
+    public ResponseEntity<String> publish(@Valid @PathVariable(value = "userNumber") long userId,@PathVariable(value = "messageId") long messageId, @RequestParam("message") String message) {
         producer.publishToTopic(message);
         userService.saveUserDetails(userId,messageId,message);
         return ResponseEntity.ok("Message sent to the topic");
     }
     
     @PostMapping("/{userNumber}/{messageId}/updateMessage")
-    public ResponseEntity<String> updateMessage(@PathVariable(value = "userNumber") long userNumber ,@PathVariable(value = "messageId") long messageId, @RequestParam("message") String message) {
+    public ResponseEntity<String> updateMessage(@Valid @PathVariable(value = "userNumber") long userNumber ,@PathVariable(value = "messageId") long messageId, @RequestParam("message") String message) {
         userService.updateUserDetails(userNumber,messageId, message);
         return ResponseEntity.ok("Message sent to the topic");
     }
+    
     @GetMapping("/export/pdf")
     public ResponseEntity<String> employeeReport(){
          pdfGenerator.generatePdfReport();

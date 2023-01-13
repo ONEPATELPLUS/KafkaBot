@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -24,6 +25,7 @@ public class User {
 	}
 
 	@Column(name = "user_number", nullable = false)
+	@NotNull
     private Long userNumber;
 
     @Column(name = "creation_date")

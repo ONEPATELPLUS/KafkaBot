@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "messages",uniqueConstraints = {@UniqueConstraint(columnNames = {"message_id"})})
@@ -20,18 +21,20 @@ public class Messages {
     protected Long id;
 
 	@Column(name = "message_id")
+	@NotNull
     protected Long messageId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
 
     @Column(name = "message")
     private String message;
     
     public Messages() {
-		super();
-		// TODO Auto-generated constructor stub
+
+
 	}
 
 	public Messages(Long id, Long messageId, User user, String message) {
